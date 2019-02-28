@@ -36,6 +36,23 @@ sup {
   bottom: 100vh;
 }
 
+#dark-mode, #light-mode {
+  animation: clickAble 1s alternate infinite ease-in-out;
+}
+
+#dark-mode:hover, #light-mode:hover {
+  cursor: pointer;
+}
+
+@keyframes clickAble {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(.8);
+  }
+}
+
 #sun-center, #sun-flames {
   fill: var(--c-light);
 }
@@ -73,6 +90,7 @@ sup {
   user-select: none;
 }
 
+
 #mode-switch:checked + #sun-moon {
   transform-origin: center center;
   transform: rotate(180deg);
@@ -86,6 +104,35 @@ sup {
 #mode-switch:checked ~ #bg {
   --dark-mode-hidden: 0;
   --light-mode-hidden: 1;
+}
+
+#hide-content {
+  display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  font-size: 2em;
+  background: var(--c-light);
+  z-index: 10;
+  border: none;
+  padding: 0 0 .5em .5em;
+  border-radius: 0 0 0 100%;
+  outline: none;
+  color: var(--c-dark);
+  filter: grayscale(100%);
+  opacity: .5;
+}
+
+#hide-content:hover,
+#hide-content:focus {
+  cursor: pointer;
+  opacity: 1;
+  filter: grayscale(100%) invert(100%);
+}
+
+#hide-content:focus ~ .layout,
+#hide-content:hover ~ .layout {
+  display: none;
 }
 
 .layout {
