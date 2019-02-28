@@ -1,0 +1,26 @@
+@import "./city-skyline.css";
+@import "./city-traffic.css";
+@import "./city-sky.css";
+
+#bg {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  background: black;
+  --dark-mode-hidden: 1;
+  --light-mode-hidden: 0;
+}
+
+#bg::before {
+  content: "";
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom, var(--c-dark) 0%, var(--c-light) 140%);
+  filter: hue-rotate(-55deg) brightness(150%);
+  opacity: calc(var(--dark-mode-hidden) + .15);
+  transition: opacity .5s ease;
+}

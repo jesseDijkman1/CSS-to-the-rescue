@@ -1,0 +1,166 @@
+.bg-city-skyline, .bg-city-skyline-fallback {
+  min-width: 1000px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.skyscraper:hover .windows *,
+.bat-signal:hover {
+  animation-name: partyHardy;
+  animation-duration: 1s;
+  animation-fill-mode: none;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  fill: var(--c-dark);
+}
+
+.skyscraper:hover .windows *:nth-child(3n) {
+  animation-delay: -.5s !important;
+}
+
+.skyscraper:hover .windows *:nth-child(3n + 1) {
+  animation-delay: -1s !important;
+}
+
+@keyframes partyHardy {
+  0% {
+    filter: url("#red-lights");
+  }
+  50% {
+    filter: url("#blue-lights");
+  }
+  74% {
+    fill: var(--c-dark);
+    filter: url("#blue-lights");
+  }
+  75% {
+    filter: url("#green-lights");
+    fill: var(--c-light);
+  }
+  100% {
+    fill: var(--c-light);
+    filter: url("#green-lights");
+  }
+}
+
+.city-skyline .windows * {
+  fill: var(--c-dark);
+  filter: url("#greyer");
+
+}
+
+#mode-switch:checked ~ #bg .windows * {
+  --window-speed: 10s;
+  fill: var(--c-light);
+  filter: none;
+  animation-name: cityLights;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-duration: var(--window-speed);
+  animation-play-state: paused;
+}
+
+#mode-switch:checked ~ #bg .windows *:nth-of-type(3n),
+#mode-switch:checked ~ #bg .windows *:nth-of-type(7n),
+#mode-switch:checked ~ #bg .windows *:nth-of-type(11n) {
+  animation-delay: var(--window-delay);
+  animation-play-state: running;
+}
+
+@keyframes cityLights {
+  0% {
+    opacity: 1;
+  }
+  49% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+
+
+
+
+#mode-switch:checked ~ #bg .tree {
+  filter: url("#tree-light")
+}
+
+.city-trees .tree-wood {
+  fill: var(--c-dark);
+  filter: url("#tree-brown");
+}
+
+.city-trees .tree-leaves {
+  fill: var(--c-dark);
+  filter: url("#leaf-green");
+}
+
+.building {
+  transition: opacity .2s linear;
+  opacity: calc(var(--dark-mode-hidden) + .1);
+}
+
+.city-3 .building {
+  fill: var(--c-dark);
+  filter: url("#gray-dark")
+}
+
+.city-2 .building {
+  fill: var(--c-dark);
+  filter: url("#gray-medium")
+}
+
+.city-1 .building {
+  fill: var(--c-dark);
+  filter: url("#gray-light")
+}
+
+.bat-signal {
+  fill: var(--c-light);
+  transition: opacity 1s ease;
+  opacity: var(--light-mode-hidden);
+}
+
+#mode-switch:checked ~ #bg .bat-signal {
+  animation: flickering 1s alternate infinite linear 1s;
+}
+
+@keyframes flickering {
+  0% {
+    opacity: calc(var(--light-mode-hidden) * .4);
+  }
+  100% {
+    opacity: calc(var(--light-mode-hidden) * .8);
+  }
+}
+
+.tree:hover .tree-leaves {
+  transform-origin: bottom;
+  animation: treeAni 1s alternate infinite linear;
+}
+
+@keyframes treeAni {
+  0% {
+    transform: scaleY(.8)
+  }
+  25% {
+    transform: scaleY(1.1)
+  }
+  50% {
+    transform: scaleY(.8)
+  }
+  75% {
+    transform: scaleY(1.1)
+  }
+  100% {
+    transform: scaleY(.8);
+  }
+}

@@ -1,0 +1,88 @@
+/* ============= Dark/light mode switching ============= */
+
+#mode-switch:checked ~ #bg .traffic-to-right .vehicle {
+  filter: url("#car-light-right");
+}
+
+#mode-switch:checked ~ #bg .traffic-to-left .vehicle {
+  filter: url("#car-light-left");
+}
+
+/* ============= Traffic ============= */
+
+.bg-city-traffic {
+  position: absolute;
+  bottom: 0;
+  left: 0vw;
+  width: 100vw;
+  min-width: 1000px;
+  z-index: 3;
+}
+
+.traffic-to-left { transform: translateX(10%) }
+.traffic-to-left .vehicle {
+  /* animation-name: trafficToLeft  */
+  animation: trafficToLeft var(--traffic-speed) forwards infinite linear var(--traffic-delay)
+}
+
+.traffic-to-right { transform: translateX(-10%) }
+.traffic-to-right .vehicle {
+  /* animation-name: trafficToRight */
+  animation: trafficToRight var(--traffic-speed) forwards infinite linear var(--traffic-delay)
+}
+
+@keyframes trafficToLeft {
+  0% { transform: translateX(0) }
+  100% { transform: translateX(-110%) }
+}
+
+@keyframes trafficToRight {
+  0% { transform: translateX(0) }
+  100% { transform: translateX(110%) }
+}
+
+/* ============= Car colors ============= */
+
+.vehicle:nth-of-type(1) .vehicle-body {
+  fill: var(--c-dark);
+  filter: url("#car-blue");
+}
+
+.vehicle:nth-of-type(2) .vehicle-body {
+  fill: var(--c-dark);
+  filter: url("#car-red");
+}
+
+.vehicle:nth-of-type(3) .vehicle-body {
+  fill: var(--c-light);
+  filter: url("#car-yellow");
+}
+
+
+
+.vehicle-wheels circle {
+  fill: var(--c-dark);
+  filter: url("#gray-dark")
+}
+
+.vehicle-headlight, .vehicle-light {
+  fill: var(--c-light);
+  transition: opacity 1s ease;
+  opacity: calc(var(--light-mode-hidden) - .25);
+  filter: url("#car-lights")
+}
+
+.vehicle-brakelight {
+  fill: var(--c-dark);
+  filter: url("#car-red");
+}
+
+/* ============= Car animations & interactions ============= */
+
+.vehicle:hover {
+  animation-play-state: paused;
+}
+
+.vehicle:hover .vehicle-light {
+  animation: partyHardy 1s alternate infinite linear;
+}

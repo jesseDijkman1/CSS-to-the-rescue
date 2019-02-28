@@ -1,0 +1,163 @@
+/* ============= Dark/light mode switching ============= */
+
+#mode-switch:checked ~ #bg .ufo { transform: scale(1) }
+
+/* ============= Clouds ============= */
+
+.bg-city-clouds {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 65vh;
+  min-width: 1000px;
+  z-index: 1;
+  transition: opacity 1s ease;
+  opacity: calc(var(--dark-mode-hidden) + .1);
+}
+
+.clouds path {
+  fill: var(--c-light);
+  filter: url("#gray-light");
+  opacity: .8;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: var(--cloud-speed);  /* Declared with javascript */
+  animation-delay: var(--cloud-delay);  /* Declared with javascript */
+}
+
+.clouds-to-left { transform: translateX(35%) }
+.clouds-to-left path { animation-name: cloudsToLeft }
+
+.clouds-to-right { transform: translateX(-35%) }
+.clouds-to-right path { animation-name: cloudsToRight }
+
+@keyframes cloudsToLeft {
+  0% { transform: translateX(35%) }
+  100% { transform: translateX(-135%) }
+}
+
+@keyframes cloudsToRight {
+  0% { transform: translateX(-35%) }
+  100% { transform: translateX(135%) }
+}
+
+/* ============= Stars ============= */
+
+.bg-city-stars {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 65vh;
+  z-index: 0;
+  transition: opacity 1s ease;
+  opacity: var(--light-mode-hidden);
+}
+
+.bg-city-stars polygon {
+  fill: var(--c-light);
+  filter: url("#gray-light");
+  opacity: .75;
+}
+
+.bg-city-stars polygon:nth-child(3n + 1) {
+  animation-name: blink;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease;
+  animation-delay: var(--star-delay); /* Declared with javascript */
+}
+
+@keyframes blink {
+  0% { opacity: 0 }
+  75% { opacity: 0 }
+  100% { opacity: .75 }
+}
+
+/* ============= Galaxy ============= */
+
+.bg-city-galaxy {
+  position: absolute;
+  animation-name: galaxy;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  transition: opacity 1s ease;
+  opacity: calc(var(--light-mode-hidden) - .25);
+}
+
+.bg-city-galaxy path {
+  fill: var(--c-light);
+  filter: url("#galaxy-color");
+}
+
+.galaxy-1 {
+  width: 3em;
+  height: 3em;
+  top: 10vh;
+  left: 20vw;
+  animation-duration: 15s;
+}
+
+.galaxy-2 {
+  width: 2em;
+  height: 2em;
+  bottom: 40vh;
+  right: 10vw;
+  animation-duration: 10s;
+}
+
+@keyframes galaxy {
+  0% { transform: rotate(0deg) }
+  100% { transform: rotate(-360deg) }
+}
+
+/* ============= UFO ============= */
+
+.bg-city-ufo {
+  --ufo-size: 8em;
+  position: absolute;
+  bottom: 50vh;
+  left: 100vw;
+  width: var(--ufo-size);
+  z-index: 2;
+  animation: ufoHorizontalFlight 7s alternate infinite cubic-bezier(.41,1.46,.52,-0.46), ufoBounce 1s alternate infinite linear;
+}
+
+.ufo {
+  transition: transform 1s ease;
+  transform: scale(0);
+}
+
+.ufo-body { fill: var(--c-dark) }
+
+.ufo-body-window { filter: url("#leaf-green") }
+.ufo-body-top { filter: url("#gray-light") }
+.ufo-body-middle { filter: url("#gray-medium") }
+.ufo-body-bottom { filter: url("#gray-dark") }
+
+.ufo-side-lights * { animation: ufoLights 1s forwards infinite linear var(--lights-delay) }
+
+.ufo-side-lights *, .ufo-beam {
+  fill: var(--c-light);
+  filter: url("#car-red");
+}
+
+.ufo-beam, .ufo-body-window { opacity: .75 }
+
+@keyframes ufoHorizontalFlight {
+  0% { transform: translateX(0) }
+  10% { transform: translateX(0) }
+  90% { transform: translateX(calc(-100vw - var(--ufo-size))) }
+  100% { transform: translateX(calc(-100vw - var(--ufo-size))) }
+}
+
+@keyframes ufoBounce {
+  0% { bottom: 45vh }
+  100% { bottom: 55vh }
+}
+
+@keyframes ufoLights {
+  0% { fill: var(--c-light) }
+  50% { fill: var(--c-dark) }
+  100% { fill: var(--c-light)}
+}
