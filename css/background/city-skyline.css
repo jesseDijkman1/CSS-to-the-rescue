@@ -1,56 +1,4 @@
-.bg-city-skyline, .bg-city-skyline-fallback {
-  min-width: 1000px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  z-index: 2;
-}
-
-.skyscraper:hover .windows *,
-.bat-signal:hover {
-  animation-name: partyHardy;
-  animation-duration: 1s;
-  animation-fill-mode: none;
-  animation-direction: alternate;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  fill: var(--c-dark);
-}
-
-.skyscraper:hover .windows *:nth-child(3n) {
-  animation-delay: -.5s !important;
-}
-
-.skyscraper:hover .windows *:nth-child(3n + 1) {
-  animation-delay: -1s !important;
-}
-
-@keyframes partyHardy {
-  0% {
-    filter: url("#red-lights");
-  }
-  50% {
-    filter: url("#blue-lights");
-  }
-  74% {
-    fill: var(--c-dark);
-    filter: url("#blue-lights");
-  }
-  75% {
-    filter: url("#green-lights");
-    fill: var(--c-light);
-  }
-  100% {
-    fill: var(--c-light);
-    filter: url("#green-lights");
-  }
-}
-
-.city-skyline .windows * {
-  fill: var(--c-dark);
-  filter: url("#greyer");
-
-}
+/* ============= Dark/light mode switching ============= */
 
 #mode-switch:checked ~ #bg .windows * {
   --window-speed: 10s;
@@ -70,37 +18,75 @@
   animation-play-state: running;
 }
 
-@keyframes cityLights {
-  0% {
-    opacity: 1;
-  }
-  49% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-
-
-
-
 #mode-switch:checked ~ #bg .tree {
   filter: url("#tree-light")
 }
 
-.city-trees .tree-wood {
-  fill: var(--c-dark);
-  filter: url("#tree-brown");
+#mode-switch:checked ~ #bg .bat-signal {
+  animation: flickering 1s alternate infinite linear 1s;
 }
 
-.city-trees .tree-leaves {
+@keyframes cityLights {
+  0% { opacity: 1 }
+  49% { opacity: 1 }
+  50% { opacity: 0 }
+  100% { opacity: 0 }
+}
+
+@keyframes flickering {
+  0% { opacity: calc(var(--light-mode-hidden) * .4) }
+  100% { opacity: calc(var(--light-mode-hidden) * .8) }
+}
+
+/* ============= Skyline ============= */
+
+.bg-city-skyline, .bg-city-skyline-fallback {
+  min-width: 1000px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.city-skyline .windows * {
   fill: var(--c-dark);
-  filter: url("#leaf-green");
+  filter: url("#greyer");
+}
+
+.skyscraper:hover .windows *,
+.bat-signal:hover {
+  animation-name: partyHardy;
+  animation-duration: 1s;
+  animation-fill-mode: none;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  fill: var(--c-dark);
+}
+
+.skyscraper:hover .windows *:nth-child(3n) {
+  animation-delay: -.5s;
+}
+
+.skyscraper:hover .windows *:nth-child(3n + 1) {
+  animation-delay: -1s;
+}
+
+@keyframes partyHardy {
+  0% { filter: url("#red-lights") }
+  50% { filter: url("#blue-lights") }
+  74% {
+    fill: var(--c-dark);
+    filter: url("#blue-lights");
+  }
+  75% {
+    filter: url("#green-lights");
+    fill: var(--c-light);
+  }
+  100% {
+    fill: var(--c-light);
+    filter: url("#green-lights");
+  }
 }
 
 .building {
@@ -129,17 +115,16 @@
   opacity: var(--light-mode-hidden);
 }
 
-#mode-switch:checked ~ #bg .bat-signal {
-  animation: flickering 1s alternate infinite linear 1s;
+/* ============= Trees ============= */
+
+.city-trees .tree-wood {
+  fill: var(--c-dark);
+  filter: url("#tree-brown");
 }
 
-@keyframes flickering {
-  0% {
-    opacity: calc(var(--light-mode-hidden) * .4);
-  }
-  100% {
-    opacity: calc(var(--light-mode-hidden) * .8);
-  }
+.city-trees .tree-leaves {
+  fill: var(--c-dark);
+  filter: url("#leaf-green");
 }
 
 .tree:hover .tree-leaves {
@@ -148,19 +133,9 @@
 }
 
 @keyframes treeAni {
-  0% {
-    transform: scaleY(.8)
-  }
-  25% {
-    transform: scaleY(1.1)
-  }
-  50% {
-    transform: scaleY(.8)
-  }
-  75% {
-    transform: scaleY(1.1)
-  }
-  100% {
-    transform: scaleY(.8);
-  }
+  0% { transform: scaleY(.8) }
+  25% { transform: scaleY(1.1) }
+  50% { transform: scaleY(.8) }
+  75% { transform: scaleY(1.1) }
+  100% { transform: scaleY(.8) }
 }

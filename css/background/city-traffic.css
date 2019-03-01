@@ -21,13 +21,11 @@
 
 .traffic-to-left { transform: translateX(10%) }
 .traffic-to-left .vehicle {
-  /* animation-name: trafficToLeft  */
   animation: trafficToLeft var(--traffic-speed) forwards infinite linear var(--traffic-delay)
 }
 
 .traffic-to-right { transform: translateX(-10%) }
 .traffic-to-right .vehicle {
-  /* animation-name: trafficToRight */
   animation: trafficToRight var(--traffic-speed) forwards infinite linear var(--traffic-delay)
 }
 
@@ -57,8 +55,6 @@
   fill: var(--c-light);
   filter: url("#car-yellow");
 }
-
-
 
 .vehicle-wheels circle {
   fill: var(--c-dark);

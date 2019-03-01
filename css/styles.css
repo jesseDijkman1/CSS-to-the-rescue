@@ -18,7 +18,7 @@
 body {
   font-family: system-ui, Helvetica, Arial, sans-serif;
   font-size: calc(16px + (24 - 16) * ((100vw - 320px) / (1600 - 320)));
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   padding-top: var(--article-margin);
 }
 
@@ -27,7 +27,7 @@ li {
 }
 
 sup {
-  /* color: purple; */
+  color: var(--c-light);
 }
 
 
@@ -45,12 +45,8 @@ sup {
 }
 
 @keyframes clickAble {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(.8);
-  }
+  0% { transform: scale(1) }
+  100% { transform: scale(.8) }
 }
 
 #sun-center, #sun-flames {
@@ -222,7 +218,8 @@ p.stretch {
 .fig .fig-img-container {
   flex-grow: 1;
   flex-basis: 50%;
-  min-width: 400px;
+  width: 100%;
+  min-width: 300px;
 }
 
 .fig figcaption {
